@@ -139,7 +139,6 @@ const ChatWrapper = () => {
       chatFooterInnerClassName={`mx-auto w-full max-w-[720px] ${isMobile && 'px-4'}`}
       onSend={doSend}
       onStopResponding={handleStop}
-      chatNode={chatNode}
       allToolIcons={appMeta?.tool_icons || {}}
       onFeedback={handleFeedback}
       suggestedQuestions={suggestedQuestions}

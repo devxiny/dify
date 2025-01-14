@@ -31,24 +31,28 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
     appData,
     appInfoLoading,
     appPrevChatList,
-    showConfigPanelBeforeChat,
     appChatListDataLoading,
     chatShouldReloadKey,
     isMobile,
     themeBuilder,
+    handleNewConversation,
   } = useChatWithHistoryContext()
+
+  const showConfigPanelBeforeChat = false
 
   const chatReady = (!showConfigPanelBeforeChat || !!appPrevChatList.length)
   const customConfig = appData?.custom_config
   const site = appData?.site
 
   useEffect(() => {
+    handleNewConversation()
+
     themeBuilder?.buildTheme(site?.chat_color_theme, site?.chat_color_theme_inverted)
     if (site) {
       if (customConfig)
         document.title = `${site.title}`
       else
-        document.title = `${site.title} - Powered by Dify`
+        document.title = `${site.title}`
     }
   }, [site, customConfig, themeBuilder])
 
@@ -72,9 +76,7 @@ const ChatWithHistory: FC<ChatWithHistoryProps> = ({
         )
       }
       {
-        isMobile && (
-          <HeaderInMobile />
-        )
+
       }
       <div className={`grow overflow-hidden ${showConfigPanelBeforeChat && !appPrevChatList.length && 'flex items-center justify-center'}`}>
         {
